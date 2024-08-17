@@ -1,20 +1,20 @@
-Shader "Unlit/SparkleOutline"
+Shader "Unlit/GlowOutlineEffect"
 {
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
         _OutlineColor ("Outline Color", Color) = (1,1,1,1)
-        _OutlineWidth ("Outline Width", Range(0.0, 0.5)) = 0.25
-        _SparkleFrequency ("Sparkle Frequency", Range(0.0, 10.0)) = 5.0
-        _SparkleIntensity ("Sparkle Intensity", Range(0.0, 1.0)) = 0.5
+        _OutlineWidth ("Outline Width", Range(0.0, 0.1)) = 0.05
+        _GlowIntensity ("Glow Intensity", Range(0.0, 1.0)) = 0.5
     }
     SubShader
     {
-        Tags {"Queue" = "Transparent" }
+        Tags {"Queue" = "Overlay" }
         LOD 200
 
         Pass
         {
+            Blend SrcAlpha OneMinusSrcAlpha
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -37,8 +37,7 @@ Shader "Unlit/SparkleOutline"
             float4 _MainTex_ST;
             float4 _OutlineColor;
             float _OutlineWidth;
-            float _SparkleFrequency;
-            float _SparkleIntensity;
+            float _GlowIntensity;
 
             v2f vert (appdata_t v)
             {
@@ -61,15 +60,15 @@ Shader "Unlit/SparkleOutline"
                 float edgeDist = min(screenUV.x, min(1.0 - screenUV.x, min(screenUV.y, 1.0 - screenUV.y)));
                 float outline = smoothstep(_OutlineWidth, _OutlineWidth * 0.5, edgeDist);
 
-                // Sparkle effect
-                float sparkle = sin(_SparkleFrequency * (screenUV.x + screenUV.y + _Time.y)) * 0.5 + 0.5;
-                sparkle = pow(sparkle, 4.0) * _SparkleIntensity;
+                // Glow effect
+                float glow = (1.0 - outline) * _GlowIntensity;
 
-                fixed4 outlineColor = _OutlineColor * (1.0 - outline + sparkle);
+                fixed4 outlineColor = _OutlineColor * glow;
 
                 return texColor + outlineColor;
             }
             ENDCG
         }
     }
+    FallBack "Diffuse"
 }

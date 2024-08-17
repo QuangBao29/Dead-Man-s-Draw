@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 2536449868924939984}
   - component: {fileID: 2536449868924939998}
   - component: {fileID: 2536449868924939999}
+  - component: {fileID: 458445363525957865}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -234,6 +235,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &458445363525957865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2536449868924939985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4924fa1205dedba4190de07462d10200, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Card: {fileID: 0}
+  CardName: {fileID: 2536449869150076012}
+  CardEffect: {fileID: 2536449870074380941}
+  CardImage: {fileID: 2536449868592497199}
 --- !u!1 &2536449869150076014
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,7 +475,7 @@ GameObject:
   - component: {fileID: 2536449869955674198}
   - component: {fileID: 2536449869955674199}
   m_Layer: 5
-  m_Name: Border
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
